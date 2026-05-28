@@ -43,16 +43,6 @@ export const createStore = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { userId } = context;
 
-    // Must have an active platform payment
-    const { data: payment } = await supabaseAdmin
-      .from("platform_payments")
-      .select("id")
-      .eq("user_id", userId)
-      .eq("status", "paid")
-      .limit(1)
-      .maybeSingle();
-    if (!payment) throw new Error("Activation payment required");
-
     // One store per user (MVP)
     const { data: existing } = await supabaseAdmin
       .from("stores")
