@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiPublicPaystackWebhookRouteImport } from './routes/api/public/paystack-webhook'
 
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -33,35 +39,46 @@ const ApiPublicPaystackWebhookRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/signup': typeof SignupRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/api/public/paystack-webhook'
+  fullPaths: '/' | '/login' | '/signup' | '/api/public/paystack-webhook'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/api/public/paystack-webhook'
-  id: '__root__' | '/' | '/login' | '/api/public/paystack-webhook'
+  to: '/' | '/login' | '/signup' | '/api/public/paystack-webhook'
+  id: '__root__' | '/' | '/login' | '/signup' | '/api/public/paystack-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
+  SignupRoute: typeof SignupRoute
   ApiPublicPaystackWebhookRoute: typeof ApiPublicPaystackWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -89,6 +106,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
+  SignupRoute: SignupRoute,
   ApiPublicPaystackWebhookRoute: ApiPublicPaystackWebhookRoute,
 }
 export const routeTree = rootRouteImport
