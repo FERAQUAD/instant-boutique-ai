@@ -14,8 +14,16 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedProductsRouteImport } from './routes/_authenticated/products'
+import { Route as AuthenticatedOrdersRouteImport } from './routes/_authenticated/orders'
+import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedActivateRouteImport } from './routes/_authenticated/activate'
+import { Route as SSlugIndexRouteImport } from './routes/s.$slug.index'
+import { Route as SSlugCheckoutRouteImport } from './routes/s.$slug.checkout'
 import { Route as ApiPublicPaystackWebhookRouteImport } from './routes/api/public/paystack-webhook'
+import { Route as SSlugProductIdRouteImport } from './routes/s.$slug.product.$id'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -41,10 +49,45 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedProductsRoute = AuthenticatedProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedOrdersRoute = AuthenticatedOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedActivateRoute = AuthenticatedActivateRouteImport.update({
   id: '/activate',
   path: '/activate',
   getParentRoute: () => AuthenticatedRoute,
+} as any)
+const SSlugIndexRoute = SSlugIndexRouteImport.update({
+  id: '/s/$slug/',
+  path: '/s/$slug/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SSlugCheckoutRoute = SSlugCheckoutRouteImport.update({
+  id: '/s/$slug/checkout',
+  path: '/s/$slug/checkout',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicPaystackWebhookRoute =
   ApiPublicPaystackWebhookRouteImport.update({
@@ -52,6 +95,11 @@ const ApiPublicPaystackWebhookRoute =
     path: '/api/public/paystack-webhook',
     getParentRoute: () => rootRouteImport,
   } as any)
+const SSlugProductIdRoute = SSlugProductIdRouteImport.update({
+  id: '/s/$slug/product/$id',
+  path: '/s/$slug/product/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -59,7 +107,15 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/activate': typeof AuthenticatedActivateRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/orders': typeof AuthenticatedOrdersRoute
+  '/products': typeof AuthenticatedProductsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
+  '/s/$slug/checkout': typeof SSlugCheckoutRoute
+  '/s/$slug/': typeof SSlugIndexRoute
+  '/s/$slug/product/$id': typeof SSlugProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -67,7 +123,15 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/activate': typeof AuthenticatedActivateRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/orders': typeof AuthenticatedOrdersRoute
+  '/products': typeof AuthenticatedProductsRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
+  '/s/$slug/checkout': typeof SSlugCheckoutRoute
+  '/s/$slug': typeof SSlugIndexRoute
+  '/s/$slug/product/$id': typeof SSlugProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,7 +141,15 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/_authenticated/activate': typeof AuthenticatedActivateRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/orders': typeof AuthenticatedOrdersRoute
+  '/_authenticated/products': typeof AuthenticatedProductsRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
+  '/s/$slug/checkout': typeof SSlugCheckoutRoute
+  '/s/$slug/': typeof SSlugIndexRoute
+  '/s/$slug/product/$id': typeof SSlugProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,7 +159,15 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/activate'
+    | '/dashboard'
+    | '/onboarding'
+    | '/orders'
+    | '/products'
+    | '/settings'
     | '/api/public/paystack-webhook'
+    | '/s/$slug/checkout'
+    | '/s/$slug/'
+    | '/s/$slug/product/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -95,7 +175,15 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/activate'
+    | '/dashboard'
+    | '/onboarding'
+    | '/orders'
+    | '/products'
+    | '/settings'
     | '/api/public/paystack-webhook'
+    | '/s/$slug/checkout'
+    | '/s/$slug'
+    | '/s/$slug/product/$id'
   id:
     | '__root__'
     | '/'
@@ -104,7 +192,15 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/_authenticated/activate'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/onboarding'
+    | '/_authenticated/orders'
+    | '/_authenticated/products'
+    | '/_authenticated/settings'
     | '/api/public/paystack-webhook'
+    | '/s/$slug/checkout'
+    | '/s/$slug/'
+    | '/s/$slug/product/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -114,6 +210,9 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
   ApiPublicPaystackWebhookRoute: typeof ApiPublicPaystackWebhookRoute
+  SSlugCheckoutRoute: typeof SSlugCheckoutRoute
+  SSlugIndexRoute: typeof SSlugIndexRoute
+  SSlugProductIdRoute: typeof SSlugProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -153,12 +252,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/products': {
+      id: '/_authenticated/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof AuthenticatedProductsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/orders': {
+      id: '/_authenticated/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof AuthenticatedOrdersRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/onboarding': {
+      id: '/_authenticated/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/activate': {
       id: '/_authenticated/activate'
       path: '/activate'
       fullPath: '/activate'
       preLoaderRoute: typeof AuthenticatedActivateRouteImport
       parentRoute: typeof AuthenticatedRoute
+    }
+    '/s/$slug/': {
+      id: '/s/$slug/'
+      path: '/s/$slug'
+      fullPath: '/s/$slug/'
+      preLoaderRoute: typeof SSlugIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/s/$slug/checkout': {
+      id: '/s/$slug/checkout'
+      path: '/s/$slug/checkout'
+      fullPath: '/s/$slug/checkout'
+      preLoaderRoute: typeof SSlugCheckoutRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/public/paystack-webhook': {
       id: '/api/public/paystack-webhook'
@@ -167,15 +315,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicPaystackWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/s/$slug/product/$id': {
+      id: '/s/$slug/product/$id'
+      path: '/s/$slug/product/$id'
+      fullPath: '/s/$slug/product/$id'
+      preLoaderRoute: typeof SSlugProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
   AuthenticatedActivateRoute: typeof AuthenticatedActivateRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedOrdersRoute: typeof AuthenticatedOrdersRoute
+  AuthenticatedProductsRoute: typeof AuthenticatedProductsRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedActivateRoute: AuthenticatedActivateRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedOrdersRoute: AuthenticatedOrdersRoute,
+  AuthenticatedProductsRoute: AuthenticatedProductsRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -189,6 +354,9 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
   ApiPublicPaystackWebhookRoute: ApiPublicPaystackWebhookRoute,
+  SSlugCheckoutRoute: SSlugCheckoutRoute,
+  SSlugIndexRoute: SSlugIndexRoute,
+  SSlugProductIdRoute: SSlugProductIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
