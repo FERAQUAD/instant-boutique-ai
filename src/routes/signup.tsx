@@ -25,7 +25,7 @@ function SignupPage() {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { emailRedirectTo: window.location.origin + "/activate" },
+      options: { emailRedirectTo: window.location.origin + "/dashboard" },
     });
     setLoading(false);
     if (error) return toast.error(error.message);
@@ -35,7 +35,7 @@ function SignupPage() {
 
   async function google() {
     const r = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin + "/activate",
+      redirect_uri: window.location.origin + "/dashboard",
     });
     if (r.error) toast.error(r.error.message ?? "Sign-in failed");
   }
