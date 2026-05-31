@@ -37,7 +37,7 @@ export const createGuestOrder = createServerFn({ method: "POST" })
     const productIds = data.items.map((i) => i.product_id);
     const { data: products, error: prodErr } = await supabaseAdmin
       .from("products")
-      .select("id, name, price, is_published, store_id")
+      .select("id, name, price, is_published, store_id, inventory_count")
       .in("id", productIds);
     if (prodErr) throw new Error(prodErr.message);
 
@@ -52,6 +52,9 @@ export const createGuestOrder = createServerFn({ method: "POST" })
       const p = products?.find((x) => x.id === item.product_id);
       if (!p || p.store_id !== store.id || !p.is_published) {
         throw new Error("Invalid item in cart");
+      }
+      if (Number(p.inventory_count) < item.quantity) {
+        throw new Error(`Not enough stock for "${p.name}" (only ${p.inventory_count} left)`);
       }
       const unit = Number(p.price);
       total += unit * item.quantity;
