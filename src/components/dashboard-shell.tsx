@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils";
 
 const nav = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard },
-  { to: "/dashboard/products", label: "Products", icon: Package },
-  { to: "/dashboard/orders", label: "Orders", icon: ShoppingBag },
-  { to: "/dashboard/settings", label: "Settings", icon: Settings },
-];
+  { to: "/products", label: "Products", icon: Package },
+  { to: "/orders", label: "Orders", icon: ShoppingBag },
+  { to: "/settings", label: "Settings", icon: Settings },
+] as const;
 
 export function DashboardShell({
   children,

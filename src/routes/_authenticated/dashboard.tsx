@@ -51,7 +51,7 @@ function Dashboard() {
             <p className="text-sm text-muted-foreground">Here's what's happening with your store.</p>
           </div>
           <Button asChild>
-            <Link to="/dashboard/products"><Plus className="mr-1 h-4 w-4" /> Add product</Link>
+            <Link to="/products"><Plus className="mr-1 h-4 w-4" /> Add product</Link>
           </Button>
         </div>
 
