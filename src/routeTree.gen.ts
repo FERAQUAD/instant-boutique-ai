@@ -19,10 +19,8 @@ import { Route as AuthenticatedProductsRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedOrdersRouteImport } from './routes/_authenticated/orders'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedActivateRouteImport } from './routes/_authenticated/activate'
 import { Route as SSlugIndexRouteImport } from './routes/s.$slug.index'
 import { Route as SSlugCheckoutRouteImport } from './routes/s.$slug.checkout'
-import { Route as ApiPublicPaystackWebhookRouteImport } from './routes/api/public/paystack-webhook'
 import { Route as SSlugProductIdRouteImport } from './routes/s.$slug.product.$id'
 
 const SignupRoute = SignupRouteImport.update({
@@ -74,11 +72,6 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-const AuthenticatedActivateRoute = AuthenticatedActivateRouteImport.update({
-  id: '/activate',
-  path: '/activate',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
 const SSlugIndexRoute = SSlugIndexRouteImport.update({
   id: '/s/$slug/',
   path: '/s/$slug/',
@@ -89,12 +82,6 @@ const SSlugCheckoutRoute = SSlugCheckoutRouteImport.update({
   path: '/s/$slug/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicPaystackWebhookRoute =
-  ApiPublicPaystackWebhookRouteImport.update({
-    id: '/api/public/paystack-webhook',
-    path: '/api/public/paystack-webhook',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const SSlugProductIdRoute = SSlugProductIdRouteImport.update({
   id: '/s/$slug/product/$id',
   path: '/s/$slug/product/$id',
@@ -106,13 +93,11 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
-  '/activate': typeof AuthenticatedActivateRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/orders': typeof AuthenticatedOrdersRoute
   '/products': typeof AuthenticatedProductsRoute
   '/settings': typeof AuthenticatedSettingsRoute
-  '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
   '/s/$slug/checkout': typeof SSlugCheckoutRoute
   '/s/$slug/': typeof SSlugIndexRoute
   '/s/$slug/product/$id': typeof SSlugProductIdRoute
@@ -122,13 +107,11 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
-  '/activate': typeof AuthenticatedActivateRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
   '/orders': typeof AuthenticatedOrdersRoute
   '/products': typeof AuthenticatedProductsRoute
   '/settings': typeof AuthenticatedSettingsRoute
-  '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
   '/s/$slug/checkout': typeof SSlugCheckoutRoute
   '/s/$slug': typeof SSlugIndexRoute
   '/s/$slug/product/$id': typeof SSlugProductIdRoute
@@ -140,13 +123,11 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
-  '/_authenticated/activate': typeof AuthenticatedActivateRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
   '/_authenticated/orders': typeof AuthenticatedOrdersRoute
   '/_authenticated/products': typeof AuthenticatedProductsRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRoute
-  '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
   '/s/$slug/checkout': typeof SSlugCheckoutRoute
   '/s/$slug/': typeof SSlugIndexRoute
   '/s/$slug/product/$id': typeof SSlugProductIdRoute
@@ -158,13 +139,11 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/signup'
-    | '/activate'
     | '/dashboard'
     | '/onboarding'
     | '/orders'
     | '/products'
     | '/settings'
-    | '/api/public/paystack-webhook'
     | '/s/$slug/checkout'
     | '/s/$slug/'
     | '/s/$slug/product/$id'
@@ -174,13 +153,11 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/signup'
-    | '/activate'
     | '/dashboard'
     | '/onboarding'
     | '/orders'
     | '/products'
     | '/settings'
-    | '/api/public/paystack-webhook'
     | '/s/$slug/checkout'
     | '/s/$slug'
     | '/s/$slug/product/$id'
@@ -191,13 +168,11 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/signup'
-    | '/_authenticated/activate'
     | '/_authenticated/dashboard'
     | '/_authenticated/onboarding'
     | '/_authenticated/orders'
     | '/_authenticated/products'
     | '/_authenticated/settings'
-    | '/api/public/paystack-webhook'
     | '/s/$slug/checkout'
     | '/s/$slug/'
     | '/s/$slug/product/$id'
@@ -209,7 +184,6 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
-  ApiPublicPaystackWebhookRoute: typeof ApiPublicPaystackWebhookRoute
   SSlugCheckoutRoute: typeof SSlugCheckoutRoute
   SSlugIndexRoute: typeof SSlugIndexRoute
   SSlugProductIdRoute: typeof SSlugProductIdRoute
@@ -287,13 +261,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
-    '/_authenticated/activate': {
-      id: '/_authenticated/activate'
-      path: '/activate'
-      fullPath: '/activate'
-      preLoaderRoute: typeof AuthenticatedActivateRouteImport
-      parentRoute: typeof AuthenticatedRoute
-    }
     '/s/$slug/': {
       id: '/s/$slug/'
       path: '/s/$slug'
@@ -308,13 +275,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SSlugCheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/paystack-webhook': {
-      id: '/api/public/paystack-webhook'
-      path: '/api/public/paystack-webhook'
-      fullPath: '/api/public/paystack-webhook'
-      preLoaderRoute: typeof ApiPublicPaystackWebhookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/s/$slug/product/$id': {
       id: '/s/$slug/product/$id'
       path: '/s/$slug/product/$id'
@@ -326,7 +286,6 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteChildren {
-  AuthenticatedActivateRoute: typeof AuthenticatedActivateRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
   AuthenticatedOrdersRoute: typeof AuthenticatedOrdersRoute
@@ -335,7 +294,6 @@ interface AuthenticatedRouteChildren {
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
-  AuthenticatedActivateRoute: AuthenticatedActivateRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
   AuthenticatedOrdersRoute: AuthenticatedOrdersRoute,
@@ -353,7 +311,6 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
-  ApiPublicPaystackWebhookRoute: ApiPublicPaystackWebhookRoute,
   SSlugCheckoutRoute: SSlugCheckoutRoute,
   SSlugIndexRoute: SSlugIndexRoute,
   SSlugProductIdRoute: SSlugProductIdRoute,
@@ -361,3 +318,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
