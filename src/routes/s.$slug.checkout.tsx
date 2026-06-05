@@ -29,7 +29,7 @@ function Checkout() {
   const { slug } = Route.useParams();
   const navigate = useNavigate();
   const placeOrder = useServerFn(createGuestOrder);
-  const items = useCart((s) => s.itemsBySlug[slug] ?? []);
+  const items = useCart((s) => s.itemsBySlug[slug]) ?? [];
   const setQty = useCart((s) => s.setQty);
   const remove = useCart((s) => s.remove);
   const clear = useCart((s) => s.clear);
