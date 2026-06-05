@@ -9,8 +9,8 @@ export function StoreShell({
   store: { store_name: string; store_slug: string; store_logo: string | null; theme_settings: any };
   children: React.ReactNode;
 }) {
-  const items = useCart((s) => s.itemsBySlug[store.store_slug] ?? []);
-  const count = cartCount(items);
+  const items = useCart((s) => s.itemsBySlug[store.store_slug]);
+  const count = cartCount(items ?? []);
   const primary = store.theme_settings?.primary ?? "#ea580c";
 
   return (
