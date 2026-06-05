@@ -22,15 +22,19 @@ function SignupPage() {
   async function handle(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: { emailRedirectTo: window.location.origin + "/dashboard" },
     });
     setLoading(false);
     if (error) return toast.error(error.message);
-    toast.success("Check your email to confirm your account.");
-    navigate({ to: "/login" });
+    toast.success("Welcome! Your account is ready.");
+    if (data.session) {
+      navigate({ to: "/dashboard" });
+    } else {
+      navigate({ to: "/login" });
+    }
   }
 
   async function google() {
